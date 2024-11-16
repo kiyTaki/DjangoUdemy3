@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %} <!--necessita do pip install django-bootstrap-form
+                        necessário também pip install setuptools, para evitar o erro
+                        ModuleNotFoundError: No module named 'distutils.util'-->
+
+{% block title %} Página de Login {% endblock %}
+
+{% block main %}
+
+<h2>Login</h2>    
+
+<form method="post">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+
+    <button type="submit" class="btn btn-info">Login</button>
+
+</form>
+
+{% endblock %}
