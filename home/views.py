@@ -6,7 +6,7 @@ from django.views import View
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home/home.html')
 
 def mylogout(request):
     logout(request)
