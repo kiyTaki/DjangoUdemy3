@@ -1,2 +1,7 @@
+{% load my_tags %}
+
 <h6>Teste de footer</h6><br>
-<h5> {{footer_message}} </h5>
+<p> {{footer_message}} </p>
+
+{% current_time "%Y-%m-%d %I:%M %p" as the_time %}
+<p>The time is {{ the_time }}.</p>
