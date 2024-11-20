@@ -29,28 +29,4 @@ class Produto(models.Model):
         return self.descricao + ' - ' + str(self.preco)
 
 
-class Venda(models.Model):
-    numero = models.CharField(max_length=7)
-    valor = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    desconto = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    impostos = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
-    produtos = models.ManyToManyField(Produto, blank=True)
-    nfe_emitida = models.BooleanField(default=False)
-    
 
-    def get_total(self):
-        tot=0
-        for produto in self.produtos.all():
-            tot += produto.preco
-        
-        tot = ((tot - self.desconto) - self.impostos)
-        return tot
-       
-    def __str__(self):
-        return self.numero
-
-@receiver(m2m_changed, sender=Venda.produtos.through)
-def update_vendas_total(sender, instance, **kwargs):
-    total = instance.get_total()
-    Venda.objects.filter(id=instance.id).update(total=total)

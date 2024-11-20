@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'bootstrapform', # de pip install django-bootstrap-form
     'clientes',
     'home',
+    'produtos',
+    'vendas',
     'debug_toolbar', # de pip install django-debug-toolbar --> importante ficar no final
 ]
 

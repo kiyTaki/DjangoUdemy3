@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Person, Documento, Venda, Produto
-from .actions import nfe_emitida, nfe_nao_emitida
+from .models import Person, Documento
+
 
 # Register your models here.
 
@@ -28,18 +28,13 @@ class PersonAdmin(admin.ModelAdmin):
     tem_foto.short_description = 'Possui foto?'
         
 
-class VendaAdmin(admin.ModelAdmin):
-    list_filter = ('pessoa__doc',)
-    search_fields =('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
-    #raw_id_fields = ('pessoa',)
-    autocomplete_fields = ('pessoa',)
-    list_display = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc', 'nfe_emitida')
-    actions = [nfe_emitida, nfe_nao_emitida]
-    filter_vertical = ['produtos', ]
+
+    
 
 
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento)
-admin.site.register(Venda, VendaAdmin)
-admin.site.register(Produto)
+
+
+
